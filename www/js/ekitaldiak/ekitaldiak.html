@@ -1,0 +1,24 @@
+<ion-view view-title="Ekitaldiak" ng-controller="EkitaldiakCTRL as vm">
+  <ion-nav-buttons side="left">
+    <!-- <button class="button icon ion-funnel" ng-click="filtroaLehioa()"></button> -->
+  </ion-nav-buttons>
+  <script id = "popover.html" type = "text/ng-template">
+  </script>
+  <ion-content>
+    <ion-list>
+      <ion-item href="#/ekitaldia/{{ekitaldi.objectId}}" class="item-thumbnail-left item-icon-right" collection-repeat="ekitaldi in vm.ekitaldiak">
+        <img class="{{ekitaldi.irudia}} cover" alt="" />
+        <h2>{{ekitaldi.titulua}}</h2>
+        <p>{{ekitaldi.deskribapenTxikia}}</p>
+        <p>
+          <span class="ion-location"> {{ekitaldi.guneDeskribapena}} gunean.
+        </p>
+        <p>
+          <span class="ion-calendar"> {{ekitaldi.hasi.iso | amDateFormat:'dd D'}},
+          <span class="ion-android-time"> {{ekitaldi.hasi.iso | amDateFormat:'HH:mm'}} - {{ekitaldi.bukatu.iso | amDateFormat:'HH:mm'}}
+        </p>
+        <i class="icon ion-ios-arrow-right"></i>
+      </ion-item>
+    <ion-list>
+  </ion-content>
+</ion-view>

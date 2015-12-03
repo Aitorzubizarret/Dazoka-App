@@ -1,0 +1,48 @@
+<ion-view view-title="{{vm.gunea.izena}}" ng-controller="GuneaCTRL as vm">
+  <ion-content class="orria">
+    <!--
+    <div class="guneIrudia"></div>
+    -->
+    <div class="guneHelbidea">
+      <span class="ion-location"> {{vm.gunea.helbidea}} ({{vm.gunea.kokapena}})
+    </div>
+    <p class="deskribapena">
+      {{vm.gunea.deskribapenHaundia}}
+    </p>
+    <div ng-if="vm.antolatzaileakDaude">
+      <p class="zerrendaTitulua">Antolatzaileak</p>
+      <ul class="zerrenda">
+        <li class="zerrendaElementua" ng-repeat="antolatzailea in vm.gunea.antolatzaileak">
+          <a href="{{antolatzailea.webgunea}}" target="_blank">{{antolatzailea.izena}}</a>
+        </li>
+      </ul>
+    </div>
+    <div ng-if="vm.laguntzaileakDaude">
+      <p class="zerrendaTitulua">Laguntzaileak</p>
+      <ul class="zerrenda">
+        <li class="zerrendaElementua" ng-repeat="laguntzailea in vm.gunea.laguntzaileak">
+          <a href="{{laguntzailea.webgunea}}" target="_blank">{{laguntzailea.izena}}</a>
+        </li>
+      </ul>
+    </div>
+    <div ng-if="vm.sareSozialakDitu">
+      <p class="zerrendaTitulua">Sare Sozialak</p>
+      <ul class="zerrenda">
+        <li class="zerrendaElementua" ng-repeat="sareSoziala in vm.gunea.sareSozialak">
+          <div class="sareSozialEsteka">
+            <span class="{{sareSoziala.logoa}} sareSozialLogotipoa"></span>
+            <span class="sareSozialIzena">{{sareSoziala.izena}}</span>
+          </div>
+          <a href="{{sareSoziala.webgunea}}" target="_blank">{{sareSoziala.kontua}}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="eskubideak">
+      <p>
+        Lege oharra:
+        <br>
+        Hemen agertzen den informazioa www.durangokoazoka.com web orritik aterata dago. Beraienak eta bertan agertzen diren enpresenak dira eskubide guztiak.
+      </p>
+    </div>
+  </ion-content>
+</ion-view>

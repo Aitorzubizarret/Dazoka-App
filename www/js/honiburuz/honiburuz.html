@@ -1,0 +1,43 @@
+<ion-view view-title="Honi Buruz" ng-controller="HoniBuruzCTRL as vm">
+  <ion-content class="orria">
+    <div class="post">
+      <div class="postTitle postText">
+        {{vm.honiburuz[0].appEzOfizialaEUSTitulua}} / {{vm.honiburuz[0].appEzOfizialaESPTitulua}}
+      </div>
+      <div class="postContent postText">
+        {{vm.honiburuz[0].appEzOfizialaEUS}}
+      </div>
+      <div class="postContent postText">
+        {{vm.honiburuz[0].appEzOfizialaESP}}
+      </div>
+    </div>
+    <div class="post">
+      <div class="postTitle postText">
+        {{vm.honiburuz[0].zergaitikEUSTitulua}}
+      </div>
+      <div class="postContent postText">
+        {{vm.honiburuz[0].zergaitikEUS}}
+      </div>
+    </div>
+    <div class="post whiteBackground">
+      <div class="postTitle postText">
+        {{vm.honiburuz[0].garatzaileaTitulua}}
+      </div>
+      <img class="profila cover" />
+      <p class="profileName">{{vm.honiburuz[0].izenAbizenakEUS}}</p>
+      <div class="postContent postText">
+        {{vm.honiburuz[0].garatzaileaEUS}}
+      </div>
+      <p class="profileLinks">
+        <span class="ion-android-globe"> {{vm.honiburuz[0].web}}
+      </p>
+      <p class="profileLinks">
+        <span class="ion-ios-email"> {{vm.honiburuz[0].email}}
+      </p>
+      <p class="profileLinks">
+        <span class="ion-social-linkedin"> {{vm.honiburuz[0].linkedin}}
+      </p>
+      <div class="postContent postText"></div>
+    </div>
+  </ion-content>
+</ion-view>

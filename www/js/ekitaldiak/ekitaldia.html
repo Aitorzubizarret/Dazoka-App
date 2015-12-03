@@ -1,0 +1,90 @@
+<ion-view view-title="Ekitaldia" ng-controller="EkitaldiaCTRL as vm">
+  <ion-content class="orria">
+    <!--
+    <div class="ekitaldiIrudia {{ekitaldia.irudia}}"></div>
+    -->
+    <div class="datuNagusiak">
+      <div class="postTitle postText">
+        {{vm.ekitaldia.titulua}}
+      </div>
+      <div class="postContent postText">
+        {{vm.ekitaldia.deskribapenTxikia}}
+      </div>
+      <div class="postContentSmall postText">
+        <span class="testuNagusia">Noiz:</span> {{vm.ekitaldia.hasi.iso | amDateFormat:'dddd, MMMM Do'}}
+      </div>
+      <div class="postContentSmall postText">
+        <span class="testuNagusia">Hasi:</span> {{vm.ekitaldia.hasi.iso | amDateFormat:'HH:mm'}}
+      </div>
+      <div class="postContentSmall postText">
+        <span class="testuNagusia">Bukatu:</span> {{vm.ekitaldia.bukatu.iso | amDateFormat:'HH:mm'}}
+      </div>
+      <div class="postContentSmall postText">
+        <span class="testuNagusia">Non:</span> {{vm.ekitaldia.guneDeskribapena}} gunean.
+      </div>
+    </div>
+    <p class="deskribapena">
+      {{vm.ekitaldia.deskribapenHaundia}}
+    </p>
+    <p ng-if="vm.generoaDauka" class="generoa">Generoa: <span>{{vm.generoa}}</span></p>
+    <div ng-if="vm.diskarenAbestiakDaude">
+      <p class="zerrendaTitulua">Diskaren abestiak</p>
+      <ul class="zerrenda">
+        <li class="zerrendaElementua" ng-repeat="abestia in vm.ekitaldia.diskarenAbestiak">
+          <span>{{abestia.abestia}}</span>
+        </li>
+      </ul>
+    </div>
+    <div ng-if="vm.biografiaDauka">
+      <p class="zerrendaTitulua">Biografia</p>
+      <p class="testua">{{vm.biografia}}</p>
+    </div>
+    <div ng-if="vm.taldekideakDaude">
+      <p class="zerrendaTitulua">Taldekideak</p>
+      <ul class="zerrenda">
+        <li class="zerrendaElementua" ng-repeat="taldekidea in vm.taldekideak">
+          <div class="taldekideak">
+            <span class="taldekideIstrumentua">{{taldekidea.istrumentua}}</span>
+          </div>
+          <span class="taldekideIzena">{{taldekidea.izena}}</span>
+        </li>
+      </ul>
+    </div>
+    <div ng-if="vm.diskografiaDauka">
+      <p class="zerrendaTitulua">Diskografia</p>
+      <ul class="zerrenda">
+        <li class="zerrendaElementuaLibre" ng-repeat="diskoa in vm.diskografia">
+          <img class="{{diskoa.portada}} diskografiaPortada cover" />
+          <span class="zerrendaLibreTestua">{{diskoa.izena}} ({{diskoa.urtea}}) - {{diskoa.mota}}</span>
+        </li>
+      </ul>
+    </div>
+    <div ng-if="vm.sareSozialakDaude">
+      <p class="zerrendaTitulua">Sare Sozialak</p>
+      <ul class="zerrenda">
+        <li class="zerrendaElementua" ng-repeat="saresoziala in vm.sareSozialak">
+          <div class="sareSozialEsteka">
+            <span class="{{saresoziala.logoa}} sareSozialLogotipoa"></span>
+            <span class="sareSozialIzena">{{saresoziala.izena}}</span>
+          </div>
+          <a href="{{saresoziala.webgunea}}" target="_blank">{{saresoziala.kontua}}</a>
+        </li>
+      </ul>
+    </div>
+    <div ng-if="vm.informazioIturriakDaude">
+      <p class="zerrendaTitulua">Informazio Iturriak</p>
+      <ul class="zerrenda">
+        <li class="zerrendaElementua" ng-repeat="iturriak in vm.ekitaldia.informazioIturriak">
+          <a href="{{iturriak.helbidea}}" target="_blank">{{iturriak.deskribapena}}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="eskubideak">
+      <p>
+        Lege oharra:
+        <br>
+        Hemen agertzen den informazioa www.durangokoazoka.com web orritik aterata dago. Beraienak eta bertan agertzen diren enpresenak dira eskubide guztiak.
+      </p>
+    </div>
+  </ion-content>
+</ion-view>

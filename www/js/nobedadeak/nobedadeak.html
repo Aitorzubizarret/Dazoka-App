@@ -1,0 +1,19 @@
+<ion-view view-title="Nobedadeak" ng-controller="NobedadeakCTRL as vm">
+  <div class="bar bar-subheader azpimenua">
+    <div class="button-bar">
+      <a class="button azpimenukoTestua {{vm.liburuaAktibatua}}" ng-model="filtroa" value='liburua' ng-click="vm.liburuenZerrenda()">Liburuak</a>
+      <a class="button azpimenukoTestua {{vm.diskaAktibatua}}" ng-model="filtroa" value='diska' ng-click="vm.diskenZerrenda()">Diskak</a>
+    </div>
+  </div>
+  <ion-content class="nobedadeak">
+    <ion-list>
+      <ion-item href="#/nobedadea/{{nobedadea.objectId}}" class="item-thumbnail-left item-icon-right" ng-repeat="nobedadea in vm.nobedadeak | nobedadeTipoa:vm.filtroa">
+        <img class="cover {{vm.filtroa}}" />
+        <h2>{{nobedadea.izena}}</h2>
+        <p class="listaPertsonalizatua">{{nobedadea.deskribapenTxikia}}</p>
+        <i class="icon ion-ios-arrow-right"></i>
+      </ion-item>
+    </ion-list>
+    {{vm.message}}
+  </ion-content>
+</ion-view>

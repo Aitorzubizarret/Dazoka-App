@@ -1,0 +1,12 @@
+<ion-view view-title="Guneak" ng-controller="GuneakCTRL as vm">
+  <ion-content>
+    <ion-list>
+      <ion-item href="#/gunea/{{gunea.objectId}}" class="item-thumbnail-left item-icon-right " ng-repeat="gunea in vm.guneak">
+        <img class="{{gunea.logo}} cover" />
+        <h2>{{gunea.izena}}</h2>
+        <p class="listaPertsonalizatua">{{gunea.deskribapenTxikia}}</p>
+        <i class="icon ion-ios-arrow-right"></i>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
