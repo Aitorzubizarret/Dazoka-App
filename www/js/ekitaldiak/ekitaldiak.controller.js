@@ -7,8 +7,14 @@
 
   function Ekitaldiak($scope, EkitaldiakData, $q, $ionicLoading, $ionicPopup, $cordovaNetwork, $rootScope, $ionicPopover) {
     var vm = this;
+
     /* Parse.com */
     Parse.initialize(ParseApplicationId, ParseClientKey);
+
+    // Eguna eta gunea filtroen inizializazioa
+    vm.egunaFiltroa = '0';
+    vm.lehioTitulua = 'Ekitaldi guztiak';
+    vm.guneaFiltroa = '8';
 
     /* Spinner */
     $scope.show = function() {
@@ -21,25 +27,31 @@
     };
 
     /* Popover */
-    var template = '<ion-popover-view><ion-header-bar><h1 class="title">Aukeratu eguna</h1>'
-    + '</ion-header-bar><ion-content>'
-    + '<div class="list"><a class="item" ng-click="aldatuFiltroa(0)">Denak</a><a class="item" ng-click="aldatuFiltroa(4)">Ostirala 4</a><a class="item" ng-click="aldatuFiltroa(5)">Larunbata 5</a><a class="item" ng-click="aldatuFiltroa(6)">Igandea 6</a><a class="item" ng-click="aldatuFiltroa(7)">Astelehena 7</a><a class="item" ng-click="aldatuFiltroa(8)">Asteartea 8</a></div>'
-    + '</ion-content></ion-popover-view>';
-
-    $scope.popover = $ionicPopover.fromTemplate(template, {
+    $ionicPopover.fromTemplateUrl('js/ekitaldiak/popover.egunak.html', {
       scope: $scope
+    }).then(function(popover) {
+      $scope.popoverEguna = popover;
+    });
+    $ionicPopover.fromTemplateUrl('js/ekitaldiak/popover.guneak.html', {
+      scope: $scope
+    }).then(function(popover) {
+      $scope.popoverGunea = popover;
     });
 
-    //Cleanup the popover when we're done with it!
+    // Cleanup the popover when we're done with it!
     $scope.$on('$destroy', function() {
-      $scope.popover.remove();
+      $scope.popoverEguna.remove();
+      $scope.popoverGunea.remove();
     });
 
-    $scope.filtroaLehioa = function($event) {
-      $scope.popover.show($event);
+    $scope.lehioaEgunaFiltroa = function($event) {
+      $scope.popoverEguna.show($event);
     }
-    $scope.aldatuFiltroa = function(eguna) {
-      $scope.popover.hide();
+    $scope.lehioaGuneaFiltroa = function($event) {
+      $scope.popoverGunea.show($event);
+    }
+    $scope.aldatuEgunaFiltroa = function(eguna) {
+      $scope.popoverEguna.hide();
       switch (eguna) {
         case 0:
           vm.lehioTitulua = 'Ekitaldi guztiak';
@@ -60,12 +72,12 @@
           vm.lehioTitulua = 'Astearteko ekitaldiak';
           break;
       }
-      vm.filtroa = eguna.toString();
+      vm.egunaFiltroa = eguna.toString();
     }
-
-    // Filtroen hasiera
-    vm.filtroa = '0';
-    vm.lehioTitulua = 'Ekitaldi guztiak';
+    $scope.aldatuGuneaFiltroa = function(gunea) {
+      $scope.popoverGunea.hide();
+      vm.guneaFiltroa = gunea.toString();
+    }
 
     /* Check Internet Connection and get data */
     $scope.$watch('online', function(status) {

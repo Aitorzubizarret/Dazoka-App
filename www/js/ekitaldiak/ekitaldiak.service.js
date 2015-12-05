@@ -28,8 +28,8 @@
         } else { // DATA
           var d = new Date();
           var n = d.getTime();
-          var timeGap = 120000; // 2 Minutu
-          //var timeGap = 3600000; // Ordu bat
+          //var timeGap = 120000; // 2 Minutu
+          var timeGap = 3600000; // Ordu bat
           if (n - ekitaldiakUpdateDate > timeGap) {
             getEkitaldiakFromParse()
             .then(function(data) {

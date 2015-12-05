@@ -2,19 +2,31 @@
   'use strict';
 
   angular.module('app')
-    .filter('ekitaldiakNoiz', EkitaldiakNoiz);
+    .filter('ekitaldiakEgunaGuneaFiltroa', Filtroa);
 
-  function EkitaldiakNoiz() {
-    return function(items, filtroa) {
+  function Filtroa() {
+    return function(items, aukeratutakoEguna, aukeratutakoGunea) {
       var filtered = [];
       angular.forEach(items, function(item) {
-        if (filtroa === '0') { // Ekitaldi guztiak
+        if ((aukeratutakoEguna === '0')&&(aukeratutakoGunea === '8')) { // Egun eta gune guztiak
           filtered.push(item);
         } else {
-          var str = item.hasi.iso;
-          var res = str.slice(9,10);
-          if (res === filtroa) {
-            filtered.push(item);
+          if (aukeratutakoEguna === '0') { // Egun guztiak
+            if (aukeratutakoGunea === item.guneId.toString()) {
+              filtered.push(item);
+            }
+          } else if (aukeratutakoGunea === '8') { // Gune guztiak
+            var itemEguna = item.hasi.iso;
+            itemEguna = itemEguna.slice(9,10);
+            if (itemEguna === aukeratutakoEguna) {
+              filtered.push(item);
+            }
+          } else { // Gune eta egun zehatz bat
+            var itemEguna = item.hasi.iso;
+            itemEguna = itemEguna.slice(9,10);
+            if ((itemEguna === aukeratutakoEguna)&&(aukeratutakoGunea === item.guneId.toString())) {
+              filtered.push(item);
+            }
           }
         }
       });
