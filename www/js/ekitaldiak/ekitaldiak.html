@@ -1,12 +1,12 @@
-<ion-view view-title="Ekitaldiak" ng-controller="EkitaldiakCTRL as vm">
+<ion-view view-title="{{vm.lehioTitulua}}" ng-controller="EkitaldiakCTRL as vm">
   <ion-nav-buttons side="left">
-    <!-- <button class="button icon ion-funnel" ng-click="filtroaLehioa()"></button> -->
+    <button class="button icon ion-calendar" ng-click="filtroaLehioa($event)"></button>
   </ion-nav-buttons>
   <script id = "popover.html" type = "text/ng-template">
   </script>
   <ion-content>
     <ion-list>
-      <ion-item href="#/ekitaldia/{{ekitaldi.objectId}}" class="item-thumbnail-left item-icon-right" collection-repeat="ekitaldi in vm.ekitaldiak">
+      <ion-item href="#/ekitaldia/{{ekitaldi.objectId}}" class="item-thumbnail-left item-icon-right" collection-repeat="ekitaldi in vm.ekitaldiak | ekitaldiakNoiz:vm.filtroa"">
         <img class="{{ekitaldi.irudia}} cover" alt="" />
         <h2>{{ekitaldi.titulua}}</h2>
         <p>{{ekitaldi.deskribapenTxikia}}</p>

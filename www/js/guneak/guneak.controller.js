@@ -7,6 +7,8 @@
 
   function Guneak($scope, GuneakData, $ionicLoading) {
     var vm = this;
+    /* Parse.com */
+    Parse.initialize(ParseApplicationId, ParseClientKey);
 
     /* Spinner */
     $scope.show = function() {

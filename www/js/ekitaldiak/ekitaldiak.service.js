@@ -28,8 +28,8 @@
         } else { // DATA
           var d = new Date();
           var n = d.getTime();
-          //var timeGap = 120000; // 2 Minutu
-          var timeGap = 3600000; // Ordu bat
+          var timeGap = 120000; // 2 Minutu
+          //var timeGap = 3600000; // Ordu bat
           if (n - ekitaldiakUpdateDate > timeGap) {
             getEkitaldiakFromParse()
             .then(function(data) {
@@ -64,7 +64,8 @@
         } else { // DATA
           var d = new Date();
           var n = d.getTime();
-          var timeGap = 120000;
+          //var timeGap = 120000;
+          var timeGap = 3600000; // Ordu bat
           if (n - ekitaldiakUpdateDate > timeGap) {
             getMusikaTaldeakFromParse()
             .then(function(data) {
@@ -99,7 +100,8 @@
         } else { // DATA
           var d = new Date();
           var n = d.getTime();
-          var timeGap = 120000;
+          //var timeGap = 120000;
+          var timeGap = 3600000; // Ordu bat
           if (n - ekitaldiakUpdateDate > timeGap) {
             getIdazleakFromParse()
             .then(function(data) {
@@ -174,6 +176,7 @@
 
       var Ekitaldiak = Parse.Object.extend("Ekitaldiak");
       var query = new Parse.Query(Ekitaldiak);
+      query.limit(500);
       query.ascending("hasi");
       query.find({
         success: function(data) {
@@ -198,6 +201,7 @@
 
       var MusikaTaldeak = Parse.Object.extend("MusikaTaldeak");
       var query = new Parse.Query(MusikaTaldeak);
+      query.limit(500);
       //query.ascending("hasi");
       query.find({
         success: function(data) {
@@ -222,6 +226,7 @@
 
       var Idazleak = Parse.Object.extend("Idazleak");
       var query = new Parse.Query(Idazleak);
+      query.limit(500);
       //query.ascending("hasi");
       query.find({
         success: function(data) {

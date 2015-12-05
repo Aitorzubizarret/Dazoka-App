@@ -93,8 +93,6 @@
             $rootScope.online = true;
           });
         }, false);
-        /* Parse.com */
-        Parse.initialize(ParseApplicationId, ParseClientKey);
       });
     });
 })();

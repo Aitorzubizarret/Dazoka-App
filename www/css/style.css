@@ -250,6 +250,11 @@
   font-size: 1.1em;
   color: #626161;
 }
+.argazkia {
+  width: 100%;
+  padding: 20px;
+  border: 1px solid #e2e2e3;
+}
 /* Popover */
 .popover {
   height: auto !important;

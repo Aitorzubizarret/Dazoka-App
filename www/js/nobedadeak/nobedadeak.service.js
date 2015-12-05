@@ -70,6 +70,7 @@
 
       var Nobedadeak = Parse.Object.extend("Nobedadeak");
       var query = new Parse.Query(Nobedadeak);
+      query.limit(500);
       query.find({
         success: function(data) {
           nobedadeak = [];

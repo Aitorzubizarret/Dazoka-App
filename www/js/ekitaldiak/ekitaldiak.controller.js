@@ -5,8 +5,10 @@
     .controller('EkitaldiakCTRL', Ekitaldiak)
     .controller('EkitaldiaCTRL', Ekitaldia);
 
-  function Ekitaldiak($scope, EkitaldiakData, $q, $ionicLoading, $ionicPopup) {
+  function Ekitaldiak($scope, EkitaldiakData, $q, $ionicLoading, $ionicPopup, $cordovaNetwork, $rootScope, $ionicPopover) {
     var vm = this;
+    /* Parse.com */
+    Parse.initialize(ParseApplicationId, ParseClientKey);
 
     /* Spinner */
     $scope.show = function() {
@@ -18,7 +20,52 @@
       $ionicLoading.hide();
     };
 
-    vm.filtroa = 'all';
+    /* Popover */
+    var template = '<ion-popover-view><ion-header-bar><h1 class="title">Aukeratu eguna</h1>'
+    + '</ion-header-bar><ion-content>'
+    + '<div class="list"><a class="item" ng-click="aldatuFiltroa(0)">Denak</a><a class="item" ng-click="aldatuFiltroa(4)">Ostirala 4</a><a class="item" ng-click="aldatuFiltroa(5)">Larunbata 5</a><a class="item" ng-click="aldatuFiltroa(6)">Igandea 6</a><a class="item" ng-click="aldatuFiltroa(7)">Astelehena 7</a><a class="item" ng-click="aldatuFiltroa(8)">Asteartea 8</a></div>'
+    + '</ion-content></ion-popover-view>';
+
+    $scope.popover = $ionicPopover.fromTemplate(template, {
+      scope: $scope
+    });
+
+    //Cleanup the popover when we're done with it!
+    $scope.$on('$destroy', function() {
+      $scope.popover.remove();
+    });
+
+    $scope.filtroaLehioa = function($event) {
+      $scope.popover.show($event);
+    }
+    $scope.aldatuFiltroa = function(eguna) {
+      $scope.popover.hide();
+      switch (eguna) {
+        case 0:
+          vm.lehioTitulua = 'Ekitaldi guztiak';
+          break;
+        case 4:
+          vm.lehioTitulua = 'Ostiraleko ekitaldiak';
+          break;
+        case 5:
+          vm.lehioTitulua = 'Larunbateko ekitaldiak';
+          break;
+        case 6:
+          vm.lehioTitulua = 'Igandeko ekitaldiak';
+          break;
+        case 7:
+          vm.lehioTitulua = 'Asteleheneko ekitaldiak';
+          break;
+        case 8:
+          vm.lehioTitulua = 'Astearteko ekitaldiak';
+          break;
+      }
+      vm.filtroa = eguna.toString();
+    }
+
+    // Filtroen hasiera
+    vm.filtroa = '0';
+    vm.lehioTitulua = 'Ekitaldi guztiak';
 
     /* Check Internet Connection and get data */
     $scope.$watch('online', function(status) {
@@ -46,12 +93,12 @@
         vm.ekitaldiak = EkitaldiakData.getAllEkitaldiakOffline();
         vm.musikaTaldeak = EkitaldiakData.getAllMusikaTaldeakOffline();
         vm.idazleak = EkitaldiakData.getAllIdazleakOffline();
-
-        if (vm.ekitaldiak.length === 0) {
-          var alertPopup = $ionicPopup.alert({
-            title: 'Aplikazioak ezin izan ditu datuak internet-etik deskargatu!',
-          });
-        }
+        // ERROREA EMATEN DU :-(
+        // if (vm.ekitaldiak.length === 0) {
+        //   var alertPopup = $ionicPopup.alert({
+        //     title: 'Aplikazioak ezin izan ditu datuak internet-etik deskargatu!',
+        //   });
+        // }
       }
     })
   }
