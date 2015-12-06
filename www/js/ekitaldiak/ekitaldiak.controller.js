@@ -11,10 +11,14 @@
     /* Parse.com */
     Parse.initialize(ParseApplicationId, ParseClientKey);
 
-    // Eguna eta gunea filtroen inizializazioa
-    vm.egunaFiltroa = '0';
-    vm.lehioTitulua = 'Ekitaldi guztiak';
-    vm.guneaFiltroa = '8';
+    /*
+      Filtroen inizializazioa.
+      Eguna mugikorretik lortuko du. Horrela ez ditu aurreko egunetako ekitaldiak erakutsiko hasieran.
+      Guneak, hasiera batean denak agertuko dira.
+    */
+    var gaurkoEguna = moment().get('date');
+    eguneratuEgunaFiltroa(gaurkoEguna.toString());
+    vm.guneaFiltroa = '8'; // Gune guztiak
 
     /* Spinner */
     $scope.show = function() {
@@ -28,12 +32,12 @@
 
     /* Popover */
     $ionicPopover.fromTemplateUrl('js/ekitaldiak/popover.egunak.html', {
-      scope: $scope
+      scope: $scope,
     }).then(function(popover) {
       $scope.popoverEguna = popover;
     });
     $ionicPopover.fromTemplateUrl('js/ekitaldiak/popover.guneak.html', {
-      scope: $scope
+      scope: $scope,
     }).then(function(popover) {
       $scope.popoverGunea = popover;
     });
@@ -50,9 +54,14 @@
     $scope.lehioaGuneaFiltroa = function($event) {
       $scope.popoverGunea.show($event);
     }
-    $scope.aldatuEgunaFiltroa = function(eguna) {
+    $scope.aldatuEgunaFiltroa = aldatuEgunaFiltroa;
+    function aldatuEgunaFiltroa(eguna) {
       $scope.popoverEguna.hide();
-      switch (eguna) {
+      eguneratuEgunaFiltroa(eguna);
+    }
+    function eguneratuEgunaFiltroa(eguna) {
+      // Switch hau lehioaren titulua jartzen du zerrendako ekitaldiak zein egunetakoak diren arabera.
+      switch (parseInt(eguna)) {
         case 0:
           vm.lehioTitulua = 'Ekitaldi guztiak';
           break;
